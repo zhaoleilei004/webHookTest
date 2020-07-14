@@ -39,7 +39,7 @@ const authorizationSuccessful = () => {
 
 app.post('*', (req, res) => {
   authorizationSuccessful();
-  console.log(JSON.parse(req.body));
+  console.log(JSON.parse(req.body).head_commit.modified);
   if (verifyWebhook(req)) {
     // Coding calling
     authorizationSuccessful();
