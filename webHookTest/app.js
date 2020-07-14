@@ -42,7 +42,7 @@ const authorizationSuccessful = () => {
   //     console.log("cacul")
   //   }
   // );
-  nodeCmd.get(
+  cmd.get(
     'C:\\Users\\lance.zhao\\Desktop\\testWEbhook\\webHookTest\\autoBuild.sh',
     function(err, data, stderr){
         console.log(data);
