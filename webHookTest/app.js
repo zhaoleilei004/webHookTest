@@ -40,6 +40,12 @@ const authorizationSuccessful = () => {
 app.post('*', (req, res) => {
   authorizationSuccessful();
   console.log(JSON.parse(req.body).head_commit.modified);
+  let commitInfor = JSON.parse(req.body).head_commit
+  console.log('Modified Author:'+commitInfor.author.name);
+  console.log('Modified Author Email:'+commitInfor.author.email);
+  for(let i=0;i<commitInfor.modified.length;i++){
+    console.log('Modified File:'+commitInfor.modified[i]);
+  }
   if (verifyWebhook(req)) {
     // Coding calling
     authorizationSuccessful();
