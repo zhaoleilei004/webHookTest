@@ -21,27 +21,14 @@ const app = express();
 app.use(bodyParser.text({ type : '*/*' }));
 
 const notAuthorized = (req, res) => {
-  console.log('Someone who is NOT Coding is calling, redirect them');
-  res.redirect(301, '/'); // Redirect to domain root
+  // console.log('Someone who is NOT Coding is calling, redirect them');
+  // res.redirect(301, '/'); // Redirect to domain root
+  res.writeHead(200, { 'Content-Type' : 'text/plain' });
+  res.end('Thanks Coding <3');
 };
 
 const authorizationSuccessful = () => {
-  console.log('Coding is calling, do something here');  
-  // TODO: Do something here
-  //此处执行CMD相关命令即可
-  // cmd.get(
-  //   'notepad',//画图板
-  //   function (data) {
-  //     console.log("data")
-  //   }
-  // );
-
-  // cmd.get(
-  // 'C:\\Windows\\System32\\Calc.exe', //计算器
-  //   function (data) {
-  //     console.log("cacul")
-  //   }
-  // );
+  console.log('Coding is calling, do something here');
   cmd.get(
     'C:\\Users\\lance.zhao\\Desktop\\testWEbhook\\autoBuild.sh',
     function(err, data, stderr){
@@ -52,7 +39,7 @@ const authorizationSuccessful = () => {
 
 app.post('*', (req, res) => {
   authorizationSuccessful();
-  console.log(req.body);
+  console.log(JSON.parse(req.body));
   if (verifyWebhook(req)) {
     // Coding calling
     authorizationSuccessful();
@@ -71,4 +58,3 @@ app.all('*', notAuthorized); // Only webhook requests allowed at this address
 app.listen(3000);
 
 console.log('Webhook service running at http://localhost:3000');
-//console.info('secret', process.env.SECRET_TOKEN);
