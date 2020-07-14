@@ -29,17 +29,23 @@ const authorizationSuccessful = () => {
   console.log('Coding is calling, do something here');  
   // TODO: Do something here
   //此处执行CMD相关命令即可
-  cmd.get(
-    'notepad',//画图板
-    function (data) {
-      console.log("data")
-    }
-  );
+  // cmd.get(
+  //   'notepad',//画图板
+  //   function (data) {
+  //     console.log("data")
+  //   }
+  // );
 
-  cmd.get(
-  'C:\\Windows\\System32\\Calc.exe', //计算器
-    function (data) {
-      console.log("cacul")
+  // cmd.get(
+  // 'C:\\Windows\\System32\\Calc.exe', //计算器
+  //   function (data) {
+  //     console.log("cacul")
+  //   }
+  // );
+  nodeCmd.get(
+    'C:\\Users\\lance.zhao\\Desktop\\testWEbhook\\webHookTest\\autoBuild.sh',
+    function(err, data, stderr){
+        console.log(data);
     }
   );
 };
