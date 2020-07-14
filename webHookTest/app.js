@@ -45,7 +45,8 @@ const authorizationSuccessful = () => {
 };
 
 app.post('*', (req, res) => {
-  console.log(req);
+  authorizationSuccessful();
+  console.log(req.body);
   if (verifyWebhook(req)) {
     // Coding calling
     authorizationSuccessful();
