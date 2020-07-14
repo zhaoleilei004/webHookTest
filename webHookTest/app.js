@@ -43,7 +43,7 @@ const authorizationSuccessful = () => {
   //   }
   // );
   cmd.get(
-    'C:\\Users\\lance.zhao\\Desktop\\testWEbhook\\webHookTest\\cmd.exe git pull',
+    'C:\\Users\\lance.zhao\\Desktop\\testWEbhook\\webHookTest\\cmd.exe',
     function(err, data, stderr){
         console.log(data);
     }
