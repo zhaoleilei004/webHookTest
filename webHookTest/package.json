@@ -1,0 +1,30 @@
+{
+  "name": "webHookTest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "(Set SECRET_TOKEN=123)&& node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Coding/Webhook.v2.Demo.git"
+  },
+  "keywords": [
+    "Coding.net",
+    "Webhook"
+  ],
+  "author": "wusisu <i@wusisu.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Coding/Webhook.v2.Demo/issues"
+  },
+  "homepage": "https://github.com/Coding/Webhook.v2.Demo#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "crypto": "^1.0.1",
+    "express": "^4.16.3",
+    "node-cmd": "^3.0.0"
+  }
+}
