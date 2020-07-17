@@ -51,11 +51,11 @@ app.post('*', (req, res) => {
       console.log('Modified File:'+commitInfor.modified[i]);
     }
 
-    request.post({url:'http://10.150.253.19:8080', form:{
-      "req": req,
-    }}, function(error, response, body) {
-      console.log(error,response,body)
-    })
+    // request.post({url:'http://10.150.253.19:8080', form:{
+    //   "req": req,
+    // }}, function(error, response, body) {
+    //   console.log(error,response,body)
+    // })
 
     res.writeHead(200, { 'Content-Type' : 'text/plain' });
     res.end('Thanks Coding <3');
