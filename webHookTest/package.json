@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "(Set SECRET_TOKEN=123)&& node index.js"
+    "dev": "(Set SECRET_TOKEN=123)&& node index.js",
+    "fix-memory-limit": "cross-env LIMIT=4048 increase-memory-limit"
   },
   "repository": {
     "type": "git",
@@ -23,8 +24,10 @@
   "homepage": "https://github.com/Coding/Webhook.v2.Demo#readme",
   "dependencies": {
     "body-parser": "^1.18.2",
+    "cross-env": "^7.0.2",
     "crypto": "^1.0.1",
     "express": "^4.16.3",
+    "increase-memory-limit": "^1.0.7",
     "node-cmd": "^3.0.0",
     "request": "^2.88.2"
   }
