@@ -2,19 +2,21 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const crypto = require('crypto');
 const cmd = require('node-cmd');
+var request = require('request');
 
 const verifyWebhook = (req) => {
-  if (!req.headers['user-agent'].includes('Coding.net Hook')) {
-    return false;
-  }
+  // if (!req.headers['user-agent'].includes('Coding.net Hook')) {
+  //   return false;
+  // }
 // Compare their hmac signature to our hmac signature
 // (hmac = hash-based message authentication code)
-  const theirSignature = req.headers['x-coding-signature'];
-  console.log(theirSignature);
-  const payload = req.body;
-  const secret = process.env.SECRET_TOKEN; 
-  const ourSignature = `sha1=${crypto.createHmac('sha1', secret).update(payload).digest('hex')}`;
-  return crypto.timingSafeEqual(Buffer.from(theirSignature), Buffer.from(ourSignature));
+  // const theirSignature = req.headers['x-coding-signature'];
+  // console.log(theirSignature);
+  // const payload = req.body;
+  // const secret = process.env.SECRET_TOKEN; 
+  // const ourSignature = `sha1=${crypto.createHmac('sha1', secret).update(payload).digest('hex')}`;
+  // return crypto.timingSafeEqual(Buffer.from(theirSignature), Buffer.from(ourSignature));
+  return true
 };
 
 const app = express();
@@ -38,19 +40,23 @@ const authorizationSuccessful = () => {
 };
 
 app.post('*', (req, res) => {
-  authorizationSuccessful();
-  console.log(JSON.parse(req.body).head_commit.modified);
-  let commitInfor = JSON.parse(req.body).head_commit
-  console.log('Modified Author:'+commitInfor.author.name);
-  console.log('Modified Author Email:'+commitInfor.author.email);
-  for(let i=0;i<commitInfor.modified.length;i++){
-    console.log('Modified File:'+commitInfor.modified[i]);
-  }
   if (verifyWebhook(req)) {
     // Coding calling
     authorizationSuccessful();
-    console.log('req', req);
-    console.log('res', res);
+    console.log(JSON.parse(req.body).head_commit.modified);
+    let commitInfor = JSON.parse(req.body).head_commit
+    console.log('Modified Author:'+commitInfor.author.name);
+    console.log('Modified Author Email:'+commitInfor.author.email);
+    for(let i=0;i<commitInfor.modified.length;i++){
+      console.log('Modified File:'+commitInfor.modified[i]);
+    }
+
+    request.post({url:'http://10.150.253.19:8080', form:{
+      "req": req,
+    }}, function(error, response, body) {
+      console.log(error,response,body)
+    })
+
     res.writeHead(200, { 'Content-Type' : 'text/plain' });
     res.end('Thanks Coding <3');
   } else {
